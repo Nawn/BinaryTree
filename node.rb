@@ -13,6 +13,19 @@ class Node
     true #If it got through all of them, without returning false, it's sorted
   end
 
+  def self.build_tree(input_array)
+  	ary = input_array.clone
+  	primary = nil
+  	ary.shuffle.each_with_index do |element, index|
+  		if index.zero?
+  			primary = Node.new(element)
+  			next
+  		end
+  		primary.add_node(element)
+  	end
+  	primary
+  end
+
   def initialize(value=0, parent=nil, l_node=nil, r_node=nil)
     @value = value
     @parent = parent
@@ -51,11 +64,6 @@ class Node
   end
 end
 
-=begin
-  *Need to create the #build_tree method:
-    +It will take an array as a param, and then shuffle it.
-    +It will then set the first in the array as the Primary node
-    +The rest will be #add_node() to the primary, and will return the primary node(root of the tree)
-    
+=begin    
   *Need to create the breadth, and depth searches (Check the website for specific instructions)
 =end
