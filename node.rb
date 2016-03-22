@@ -14,16 +14,16 @@ class Node
   end
 
   def self.build_tree(input_array)
-  	ary = input_array.clone
-  	primary = nil
+  	ary = input_array.clone #Cloned arry to avoid error
+  	primary = nil #declare this variable in this scope
   	ary.shuffle.each_with_index do |element, index|
-  		if index.zero?
-  			primary = Node.new(element)
-  			next
+  		if index.zero? #If it's the first one
+  			primary = Node.new(element) #Make it the primary node
+  			next #and go to the next one
   		end
-  		primary.add_node(element)
+  		primary.add_node(element) #Add the remainder of them to the primary node
   	end
-  	primary
+  	primary #Then return the finished tree
   end
 
   def initialize(value=0, parent=nil, l_node=nil, r_node=nil)
