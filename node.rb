@@ -33,6 +33,17 @@ class Node
     @r_child = r_node
   end
 
+  def breadth_first_search(search_value)
+    if @value != search_value && @l_child.nil? && @r_child.nil?
+      return nil
+    end
+
+    return self if @value == search_value
+
+    @l_child.breadth_first_search(search_value) unless @l_child.nil?
+    @r_child.breadth_first_search(search_value) unless @r_child.nil?
+  end
+
   def display(tab_number=0)
     puts "#{"\t" * tab_number}Value: #{@value}"
     @l_child.display(tab_number+1) unless @l_child.nil? #Unless there's nothing there, show children with depth(tabs)
@@ -64,6 +75,8 @@ class Node
   end
 end
 
-=begin    
-  *Need to create the breadth, and depth searches (Check the website for specific instructions)
-=end
+node1 = Node.build_tree(Array(1..20))
+node1.display
+puts "Now to search it!"
+node2 = node1.breadth_first_search(16)
+node2.display
