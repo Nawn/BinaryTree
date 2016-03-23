@@ -33,15 +33,15 @@ class Node
     @r_child = r_node
   end
 
-  def breadth_first_search(search_value)
-    if @value != search_value && @l_child.nil? && @r_child.nil?
+  def depth_first(search_value)
+    if @value != search_value && @l_child.nil? && @r_child.nil? #If this isn't it, and there are no kids
       return nil
     end
 
-    return self if @value == search_value
+    return self if @value == search_value #Return this node, if it's the correct one
 
-    @l_child.breadth_first_search(search_value) unless @l_child.nil?
-    @r_child.breadth_first_search(search_value) unless @r_child.nil?
+    @l_child.depth_first(search_value) unless @l_child.nil? #If it hasn't returned(because it wasn't found) Check the children
+    @r_child.depth_first(search_value) unless @r_child.nil?
   end
 
   def display(tab_number=0)
@@ -78,5 +78,5 @@ end
 node1 = Node.build_tree(Array(1..20))
 node1.display
 puts "Now to search it!"
-node2 = node1.breadth_first_search(16)
+node2 = node1.depth_first(16)
 node2.display
